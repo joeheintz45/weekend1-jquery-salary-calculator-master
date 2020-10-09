@@ -1,3 +1,16 @@
-html {
-  background-color: blue;
+html,
+body {
+  margin: 0;
+}
+
+header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: gray;
+  text-align: center;
+  color: white;
+}
+
+.inputForm {
+  padding: 5px;
 }
