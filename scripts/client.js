@@ -19,6 +19,7 @@ function grabForm() {
 
   //console.log(firstName, lastName, idNum, title, salary);
   storeForm(firstName, lastName, idNum, title, salary);
+  render();
 }
 
 function storeForm(firstName, lastName, id, title, salary) {
@@ -31,4 +32,19 @@ function storeForm(firstName, lastName, id, title, salary) {
   };
 
   employeeList.push(employee);
+}
+
+function render() {
+  const list = $('.js-employee-list');
+  list.empty();
+  for (let i = 0; i < employeeList.length; i++) {
+    const info = employeeList[i];
+    list.append(
+      `<li>${info.firstName}</li>
+      <li>${info.lastName}</li>
+      <li>${info.id}</li>
+      <li>${info.title}</li>
+      <li>${info.salary}</li>`
+    );
+  }
 }
