@@ -1,4 +1,6 @@
-console.log('hey');
+console.log('Salary Calculator');
+
+const employeeList = [];
 
 $(document).ready(onReady);
 
@@ -15,5 +17,18 @@ function grabForm() {
   const title = $('.js-title').val();
   const salary = $('.js-salary').val();
 
-  console.log(firstName, lastName, idNum, title, salary);
+  //console.log(firstName, lastName, idNum, title, salary);
+  storeForm(firstName, lastName, idNum, title, salary);
+}
+
+function storeForm(firstName, lastName, id, title, salary) {
+  const employee = {
+    firstName,
+    lastName,
+    id,
+    title,
+    salary,
+  };
+
+  employeeList.push(employee);
 }
