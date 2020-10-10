@@ -30,3 +30,7 @@ header {
 .employee-table-head {
   background-color: lightgray;
 }
+
+.employee-table-foot {
+  text-align: right;
+}
