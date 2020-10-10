@@ -36,15 +36,18 @@ function storeForm(firstName, lastName, id, title, salary) {
 
 function render() {
   const list = $('.js-employee-list');
+
   list.empty();
   for (let i = 0; i < employeeList.length; i++) {
     const info = employeeList[i];
     list.append(
-      `<li>${info.firstName}</li>
-      <li>${info.lastName}</li>
-      <li>${info.id}</li>
-      <li>${info.title}</li>
-      <li>${info.salary}</li>`
+      `<tr>
+      <td>${info.firstName}</td>
+      <td>${info.lastName}</td>
+      <td>${info.id}</td>
+      <td>${info.title}</td>
+      <td>${info.salary}</td>
+      </tr>`
     );
   }
 }
