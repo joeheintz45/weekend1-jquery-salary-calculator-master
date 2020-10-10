@@ -6,6 +6,7 @@ $(document).ready(onReady);
 
 function onReady() {
   $('.js-submit-btn').on('click', grabForm);
+  $('.js-employee-list').on('click', '.js-delete-btn', deleteEmployee);
 }
 
 function grabForm() {
@@ -28,8 +29,10 @@ function storeForm(firstName, lastName, id, title, salary) {
     id,
     title,
     salary,
+    isDeleted: false,
   };
 
+  //checkInputs(firstName, lastName, id, title, salary, employee);
   employeeList.push(employee);
 }
 
@@ -46,7 +49,7 @@ function render() {
       <td>${info.id}</td>
       <td>${info.title}</td>
       <td>$${Number((info.salary * 100) / 100)}</td>
-      <td><button class="">Delete</button></td>
+      <td><button class="js-delete-btn" data-index="${i}">Delete</button></td>
       </tr>`
     );
   }
@@ -74,4 +77,27 @@ function addMonthlySalary() {
   }
 
   $('.js-monthly-salary').text(Math.round((monthlySalary / 12) * 100) / 100);
+}
+
+function deleteEmployee() {
+  console.log('delete employee');
+
+  const index = $(this).data('index');
+  employeeList[index].isDeleted = true;
+  employeeList.splice(index, 1);
+  $(this).parent().parent().remove();
+}
+
+function checkInputs(firstName, lastName, idNum, title, salary, employee) {
+  if (
+    Object.keys(firstName).length === 0 ||
+    Object.keys(lastName).length === 0 ||
+    Object.keys(idNum).length === 0 ||
+    Object.keys(title).length === 0 ||
+    Object.keys(salary).length === 0
+  ) {
+    alert('Please Fill All Fields');
+  } else {
+    employeeList.push(employee);
+  }
 }
