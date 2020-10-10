@@ -45,7 +45,7 @@ function render() {
       <td>${info.lastName}</td>
       <td>${info.id}</td>
       <td>${info.title}</td>
-      <td>${info.salary}</td>
+      <td>$${info.salary}</td>
       <td></td>
       </tr>`
     );
@@ -61,11 +61,11 @@ function clearInput() {
 }
 
 function addTotalSalary() {
-  let totalSalary = 0;
+  let monthlySalary = 0;
 
   for (let i = 0; i < employeeList.length; i++) {
     const salary = employeeList[i].salary;
-    totalSalary += parseInt(salary);
+    monthlySalary = monthlySalary + Number(salary);
   }
-  $('.js-total-salary').text(totalSalary);
+  $('.js-monthly-salary').text(monthlySalary / 12);
 }
