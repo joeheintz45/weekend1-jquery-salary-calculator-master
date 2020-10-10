@@ -5,8 +5,6 @@ const employeeList = [];
 $(document).ready(onReady);
 
 function onReady() {
-  console.log('in onReady');
-
   $('.js-submit-btn').on('click', grabForm);
 }
 
@@ -47,6 +45,7 @@ function render() {
       <td>${info.id}</td>
       <td>${info.title}</td>
       <td>${info.salary}</td>
+      <td></td>
       </tr>`
     );
   }
