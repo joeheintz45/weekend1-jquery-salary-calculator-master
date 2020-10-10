@@ -19,7 +19,7 @@ function grabForm() {
   storeForm(firstName, lastName, idNum, title, salary);
   render();
   addMonthlySalary();
-  //clearInput();
+  clearInput();
 }
 
 function storeForm(firstName, lastName, id, title, salary) {
@@ -42,16 +42,20 @@ function render() {
   list.empty();
   for (let i = 0; i < employeeList.length; i++) {
     const info = employeeList[i];
-    list.append(
-      `<tr>
-      <td>${info.firstName}</td>
-      <td>${info.lastName}</td>
-      <td>${info.id}</td>
-      <td>${info.title}</td>
-      <td>$${Number((info.salary * 100) / 100)}</td>
-      <td><button class="js-delete-btn" data-index="${i}">Delete</button></td>
-      </tr>`
-    );
+
+    if (employeeList[i].isDeleted === true) {
+    } else {
+      list.append(
+        `<tr>
+              <td>${info.firstName}</td>
+              <td>${info.lastName}</td>
+              <td>${info.id}</td>
+              <td>${info.title}</td>
+              <td>$${Number(info.salary).toFixed(2)}</td>
+              <td><button class="js-delete-btn" data-index="${i}">Delete</button></td>
+              </tr>`
+      );
+    }
   }
 }
 
@@ -71,21 +75,20 @@ function addMonthlySalary() {
     const salary = employeeList[i].salary;
     monthlySalary = monthlySalary + Number(salary);
   }
+  monthlySalary = monthlySalary / 12;
 
-  if (monthlySalary / 12 > maxMonthSal) {
+  if (monthlySalary > maxMonthSal) {
     $('.employee-table-foot').addClass('makeRed');
   }
 
-  $('.js-monthly-salary').text(Math.round((monthlySalary / 12) * 100) / 100);
+  $('.js-monthly-salary').text(monthlySalary.toFixed(2));
 }
 
 function deleteEmployee() {
-  console.log('delete employee');
-
   const index = $(this).data('index');
   employeeList[index].isDeleted = true;
-  employeeList.splice(index, 1);
-  $(this).parent().parent().remove();
+
+  $(this).parent().parent().empty();
 }
 
 function checkInputs(firstName, lastName, idNum, title, salary, employee) {
