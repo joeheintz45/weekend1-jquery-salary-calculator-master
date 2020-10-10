@@ -67,5 +67,5 @@ function addTotalSalary() {
     const salary = employeeList[i].salary;
     monthlySalary = monthlySalary + Number(salary);
   }
-  $('.js-monthly-salary').text(monthlySalary / 12);
+  $('.js-monthly-salary').text(Math.round((monthlySalary / 12) * 100) / 100);
 }
