@@ -9,6 +9,7 @@ function onReady() {
   $('.js-employee-list').on('click', '.js-delete-btn', deleteEmployee);
 }
 
+// collecting input data and executing functions for what to do with the data
 function grabForm() {
   const firstName = $('.js-first-name').val();
   const lastName = $('.js-last-name').val();
@@ -20,8 +21,9 @@ function grabForm() {
   render();
   addMonthlySalary();
   clearInput();
-}
+} // end grabForm function
 
+// stores employee info to object
 function storeForm(firstName, lastName, id, title, salary) {
   const employee = {
     firstName,
@@ -32,10 +34,11 @@ function storeForm(firstName, lastName, id, title, salary) {
     isDeleted: false,
   };
 
-  //checkInputs(firstName, lastName, id, title, salary, employee);
-  employeeList.push(employee);
-}
+  checkInputs(firstName, lastName, id, title, salary, employee);
+  //employeeList.push(employee);
+} // end storeForm function
 
+// renders the employee info to the DOM
 function render() {
   const list = $('.js-employee-list');
 
@@ -57,16 +60,18 @@ function render() {
       );
     }
   }
-}
+} // end render function
 
+// clears the values from the input boxes
 function clearInput() {
   $('.js-first-name').val('');
   $('.js-last-name').val('');
   $('.js-id-number').val('');
   $('.js-title').val('');
   $('.js-salary').val('');
-}
+} // end clearInput function
 
+// adds employees salaries and calculates their total monthly salary
 function addMonthlySalary() {
   let monthlySalary = 0;
   const maxMonthSal = 20000;
@@ -82,15 +87,17 @@ function addMonthlySalary() {
   }
 
   $('.js-monthly-salary').text(monthlySalary.toFixed(2));
-}
+} // end addMonthlySalary function
 
+// deletes employee info from DOM on click
 function deleteEmployee() {
   const index = $(this).data('index');
   employeeList[index].isDeleted = true;
 
   $(this).parent().parent().empty();
-}
+} // end delete employee function
 
+// verifies that all input fields have values
 function checkInputs(firstName, lastName, idNum, title, salary, employee) {
   if (
     Object.keys(firstName).length === 0 ||
@@ -103,4 +110,4 @@ function checkInputs(firstName, lastName, idNum, title, salary, employee) {
   } else {
     employeeList.push(employee);
   }
-}
+} // end checkInputs
