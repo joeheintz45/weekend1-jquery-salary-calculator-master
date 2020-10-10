@@ -17,7 +17,7 @@ function grabForm() {
 
   storeForm(firstName, lastName, idNum, title, salary);
   render();
-  addTotalSalary();
+  addMonthlySalary();
   //clearInput();
 }
 
@@ -45,8 +45,8 @@ function render() {
       <td>${info.lastName}</td>
       <td>${info.id}</td>
       <td>${info.title}</td>
-      <td>$${info.salary}</td>
-      <td></td>
+      <td>$${Number((info.salary * 100) / 100)}</td>
+      <td><button class="">Delete</button></td>
       </tr>`
     );
   }
@@ -60,12 +60,18 @@ function clearInput() {
   $('.js-salary').val('');
 }
 
-function addTotalSalary() {
+function addMonthlySalary() {
   let monthlySalary = 0;
+  const maxMonthSal = 20000;
 
   for (let i = 0; i < employeeList.length; i++) {
     const salary = employeeList[i].salary;
     monthlySalary = monthlySalary + Number(salary);
   }
+
+  if (monthlySalary / 12 > maxMonthSal) {
+    $('.employee-table-foot').addClass('makeRed');
+  }
+
   $('.js-monthly-salary').text(Math.round((monthlySalary / 12) * 100) / 100);
 }
