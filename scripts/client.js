@@ -15,9 +15,10 @@ function grabForm() {
   const title = $('.js-title').val();
   const salary = $('.js-salary').val();
 
-  //console.log(firstName, lastName, idNum, title, salary);
   storeForm(firstName, lastName, idNum, title, salary);
   render();
+  addTotalSalary();
+  //clearInput();
 }
 
 function storeForm(firstName, lastName, id, title, salary) {
@@ -49,4 +50,22 @@ function render() {
       </tr>`
     );
   }
+}
+
+function clearInput() {
+  $('.js-first-name').val('');
+  $('.js-last-name').val('');
+  $('.js-id-number').val('');
+  $('.js-title').val('');
+  $('.js-salary').val('');
+}
+
+function addTotalSalary() {
+  let totalSalary = 0;
+
+  for (let i = 0; i < employeeList.length; i++) {
+    const salary = employeeList[i].salary;
+    totalSalary += parseInt(salary);
+  }
+  $('.js-total-salary').text(totalSalary);
 }
