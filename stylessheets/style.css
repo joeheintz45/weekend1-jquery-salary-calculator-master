@@ -49,3 +49,12 @@ header {
   background-color: red;
   color: white;
 }
+
+.makeWhite {
+  background-color: white;
+  color: black;
+}
+
+.employee-list:hover {
+  background-color: rgb(242, 242, 242);
+}

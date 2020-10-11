@@ -34,8 +34,8 @@ function storeForm(firstName, lastName, id, title, salary) {
     isDeleted: false,
   };
 
-  checkInputs(firstName, lastName, id, title, salary, employee);
-  //employeeList.push(employee);
+  //checkInputs(firstName, lastName, id, title, salary, employee);
+  employeeList.push(employee);
 } // end storeForm function
 
 // renders the employee info to the DOM
@@ -49,12 +49,14 @@ function render() {
     if (employeeList[i].isDeleted === true) {
     } else {
       list.append(
-        `<tr>
+        `<tr class="employee-list">
               <td>${info.firstName}</td>
               <td>${info.lastName}</td>
               <td>${info.id}</td>
               <td>${info.title}</td>
-              <td>$${Number(info.salary).toFixed(2)}</td>
+              <td>$${Number(info.salary)
+                .toFixed(2)
+                .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')}</td>
               <td><button class="js-delete-btn" data-index="${i}">Delete</button></td>
               </tr>`
       );
@@ -77,16 +79,15 @@ function addMonthlySalary() {
   const maxMonthSal = 20000;
 
   for (let i = 0; i < employeeList.length; i++) {
-    const salary = employeeList[i].salary;
-    monthlySalary = monthlySalary + Number(salary);
-  }
-  monthlySalary = monthlySalary / 12;
-
-  if (monthlySalary > maxMonthSal) {
-    $('.employee-table-foot').addClass('makeRed');
+    const salary = employeeList[i].salary / 12;
+    monthlySalary += Number(salary);
   }
 
-  $('.js-monthly-salary').text(monthlySalary.toFixed(2));
+  monthlySalary = deleteSal();
+
+  $('.js-monthly-salary').text(
+    monthlySalary.toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+  );
 } // end addMonthlySalary function
 
 // deletes employee info from DOM on click
@@ -95,6 +96,7 @@ function deleteEmployee() {
   employeeList[index].isDeleted = true;
 
   $(this).parent().parent().empty();
+  deleteSal();
 } // end delete employee function
 
 // verifies that all input fields have values
@@ -111,3 +113,30 @@ function checkInputs(firstName, lastName, idNum, title, salary, employee) {
     employeeList.push(employee);
   }
 } // end checkInputs
+
+// subtracts deleted salary from output
+function deleteSal() {
+  let monthlySalary = 0;
+  const maxMonthSal = 20000;
+
+  for (let i = 0; i < employeeList.length; i++) {
+    salary = employeeList[i];
+    monthlySalary += salary.salary / 12;
+
+    if (salary.isDeleted) {
+      monthlySalary -= salary.salary / 12;
+    }
+  }
+
+  if (monthlySalary > maxMonthSal) {
+    $('.employee-table-foot').addClass('makeRed');
+  } else if (monthlySalary < maxMonthSal) {
+    $('.employee-table-foot').addClass('makeWhite');
+  }
+
+  $('.js-monthly-salary').text(
+    monthlySalary.toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+  );
+
+  return monthlySalary;
+} // end deleteSal function
