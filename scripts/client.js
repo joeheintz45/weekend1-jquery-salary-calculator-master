@@ -128,11 +128,7 @@ function deleteSal() {
     }
   }
 
-  if (monthlySalary > maxMonthSal) {
-    $('.employee-table-foot').addClass('makeRed');
-  } else if (monthlySalary < maxMonthSal) {
-    $('.employee-table-foot').addClass('makeWhite');
-  }
+  makeTotalRed(maxMonthSal, monthlySalary);
 
   $('.js-monthly-salary').text(
     monthlySalary.toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
@@ -140,3 +136,11 @@ function deleteSal() {
 
   return monthlySalary;
 } // end deleteSal function
+
+function makeTotalRed(maxMonthSal, monthlySalary) {
+  if (monthlySalary > maxMonthSal) {
+    $('.employee-table-foot').addClass('makeRed');
+  } else if (monthlySalary <= maxMonthSal) {
+    $('.employee-table-foot').removeClass('makeRed');
+  }
+}
