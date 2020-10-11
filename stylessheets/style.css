@@ -2,16 +2,15 @@ html,
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(159, 223, 191);
 }
 
 header {
-  margin: 10px 5px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: gray;
+  background-color: rgb(32, 96, 64);
   text-align: center;
   color: white;
-  border-radius: 25px;
 }
 
 /* h2 {
@@ -23,6 +22,17 @@ header {
   text-align: center;
 }
 
+.container-input {
+  background-color: rgb(32, 96, 64);
+  color: white;
+  border-radius: 25px;
+  margin: 10px 20px;
+}
+
+.submit-btn {
+  margin: 10px;
+}
+
 .employee-table {
   border-collapse: collapse;
   margin-left: auto;
@@ -30,7 +40,7 @@ header {
 }
 
 .employee-table td {
-  border: 1px solid gray;
+  border: 1px solid black;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
@@ -38,11 +48,18 @@ header {
 }
 
 .employee-table-head {
-  background-color: lightgray;
+  color: white;
+  background-color: rgb(51, 153, 102);
+}
+
+.employee-table-body {
+  background-color: rgb(198, 236, 216);
 }
 
 .employee-table-foot {
   text-align: right;
+  color: white;
+  background-color: rgb(51, 153, 102);
 }
 
 .makeRed {
@@ -50,11 +67,7 @@ header {
   color: white;
 }
 
-.makeWhite {
-  background-color: white;
-  color: black;
-}
-
 .employee-list:hover {
-  background-color: rgb(242, 242, 242);
+  background-color: rgb(51, 153, 102);
+  color: white;
 }

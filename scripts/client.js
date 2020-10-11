@@ -34,8 +34,8 @@ function storeForm(firstName, lastName, id, title, salary) {
     isDeleted: false,
   };
 
-  //checkInputs(firstName, lastName, id, title, salary, employee);
-  employeeList.push(employee);
+  checkInputs(firstName, lastName, id, title, salary, employee);
+  //employeeList.push(employee);
 } // end storeForm function
 
 // renders the employee info to the DOM
@@ -137,10 +137,11 @@ function deleteSal() {
   return monthlySalary;
 } // end deleteSal function
 
+// makes footer red if the max monthly value is surpassed
 function makeTotalRed(maxMonthSal, monthlySalary) {
   if (monthlySalary > maxMonthSal) {
     $('.employee-table-foot').addClass('makeRed');
   } else if (monthlySalary <= maxMonthSal) {
     $('.employee-table-foot').removeClass('makeRed');
   }
-}
+} // end makeTotalRed function
